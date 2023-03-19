@@ -1,0 +1,16 @@
+<app-header></app-header>
+<div class="container">
+  <h1>Registreer</h1>
+  <div class="input-group">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <input ngModel name="firstName" type="text" placeholder="voornaam" aria-label="Firstname" class="form-control" required>
+      <input ngModel name="lastName" type="text" placeholder="achternaam" aria-label="Lastname" class="form-control" required>
+      <input ngModel name="password" type="password" class="form-control" placeholder="password" aria-label="password" required>
+      <input ngModel name="email" id="email" type="email" class="form-control" placeholder="email" aria-label="email" required email #email="ngModel">
+      <span *ngIf="!email.valid && email.touched" class="help-block">Vul een correcte email in</span>
+
+      <button style="margin-right: 1%; margin-top: 1%" type="submit" class="btn btn-primary mb-3" [disabled]="!f.valid">registreer</button>
+      <p *ngIf="userCreated">Gebruiker is aangemaakt!<button style="margin-left: 1%" class="btn btn-primary mb-3" [routerLink]="['/', 'login']">Ga naar login</button></p>
+    </form>
+  </div>
+</div>

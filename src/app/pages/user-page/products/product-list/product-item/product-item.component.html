@@ -1,0 +1,11 @@
+<div class="card col-md-3" style="margin-bottom: 20px;">
+  <a class="list-group-item clearfix" [routerLink]="['product/', product.id]" style="cursor: pointer; height: auto">
+      <span>
+        <img src="{{ product.imagePath }}" alt="{{ product.productName }}" class="img-responsive" style="max-height: 200px;">
+      </span>
+    <div>
+      <h4 class="list-group-item-heading">{{ product.productName }}</h4>
+      <p class="list-group-item-text">€ {{ product.price }},-</p>
+    </div>
+  </a>
+</div>

@@ -1,0 +1,45 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a [routerLink]="['/']" class="navbar-brand">Webshop</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li *ngFor="let category of categories"><a [routerLink]="['/', 'products', category.categoryName]">{{category.categoryName}}</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="loggedIn">
+          <a [routerLink] = "['/', 'basket']">
+            <i class="glyphicon glyphicon-shopping-cart">
+            </i>
+          </a>
+        </li>
+
+        <li *ngIf="loggedIn"><a (click)="logout()" routerLink="/" style="cursor:pointer">Logout</a></li>
+        <li  *ngIf="!loggedIn"><a [routerLink]="['/', 'login']">Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<!--<header>-->
+<!--  <div class="container">-->
+<!--    <nav>-->
+<!--      <span><a>Webshop</a></span>-->
+<!--      <ul>-->
+<!--        <div>-->
+<!--          <li><a>T-shirts</a></li>-->
+<!--          <li><a>Truien</a></li>-->
+<!--          <li><a>Broeken</a></li>-->
+<!--          <li><a>Sokken</a></li>-->
+<!--        </div>-->
+<!--      </ul>-->
+<!--      <ul>-->
+<!--        <li>Login</li>-->
+<!--        <li>Winkelmandje</li>-->
+<!--      </ul>-->
+
+<!--    </nav>-->
+<!--  </div>-->
+<!--</header>-->

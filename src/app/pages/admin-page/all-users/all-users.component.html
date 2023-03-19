@@ -1,0 +1,19 @@
+<app-admin-header></app-admin-header>
+<div class="container">
+  <div class="col-md-1"></div>
+  <div class="col-md-9 offset-md-1">
+    <div class="row">
+      <h1>Alle Gebruikers</h1>
+    </div>
+    <div class="row">
+      <hr>
+      <p>Klik op de gebruiker die u wilt managen</p>
+      <ul class="list-group">
+        <a class="list-group-item" style="cursor: pointer; margin-bottom: 1%; word-spacing: 5px" *ngFor="let user of users"
+           [routerLink]="['/', 'admin-all-users', 'edit', user.id]">
+          {{ user.firstName }} | {{ user.lastName }}
+        </a>
+      </ul>
+    </div>
+  </div>
+</div>

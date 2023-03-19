@@ -1,0 +1,21 @@
+<app-header></app-header>
+<div class="container">
+  <div style="margin-left: 10%" class="col-md-9">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm" class="row g-3">
+      <div class="col-auto">
+        <label for="email" class="visually-hidden">Email</label>
+        <input ngModel name="email" id="email" type="email" class="form-control" value="email@example.com" placeholder="Email" required email #email="ngModel">
+        <span *ngIf="!email.valid && email.touched" class="help-block">Vul een correcte email in</span>
+      </div>
+      <div class="col-auto">
+        <label for="inputPassword2" class="visually-hidden">Wachtwoord</label>
+        <input ngModel name="password" type="password" class="form-control" id="inputPassword2" placeholder="Wachtwoord" required>
+      </div>
+      <div class="col-auto" style="margin-top: 1%">
+        <button style="margin-right: 1%" type="submit" class="btn btn-primary mb-3" [disabled]="!f.valid">Login</button>
+        <a [routerLink]="['/', 'register']" style="cursor: pointer">Maak een account aan</a>
+      </div>
+    </form>
+  </div>
+
+</div>

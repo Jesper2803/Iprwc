@@ -1,0 +1,40 @@
+<app-admin-header></app-admin-header>
+<div class="container">
+  <div class="col-auto">
+    <div class="row">
+      <h1>Alle Categorien</h1>
+    </div>
+
+    <div class="row">
+      <div class="input-group">
+        <form (ngSubmit)="addCategory(f)" #f="ngForm">
+          <input ngModel name="categoryName" style="margin-bottom: 3%" type="text" placeholder="nieuwe categorie" aria-label="categoryName" class="form-control" required>
+          <button type="submit" class="btn btn-primary mb-3" [disabled]="!f.valid">Voeg toe</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+
+    <div class="row" style="margin-bottom: 2%">
+      <button class="btn btn-primary mb-3" (click)="editMode = !editMode">
+        Edit Mode <i class="glyphicon glyphicon-edit">
+      </i>
+      </button>
+    </div>
+    <div class="row">
+      <ul class="list-group">
+        <li class="list-group-item" style="cursor: pointer; margin-bottom: 1%" *ngFor="let category of categories">
+          <form (ngSubmit)="editCategory(category.id, f)" #f="ngForm">
+            <input ngModel [disabled]="!editMode" name="categoryName" placeholder="{{ category.categoryName}}">
+            <i (click)="onDeletionCategory(category.id)" style="float: right; margin-left: 1%; padding-top: 4px" class="glyphicon glyphicon-trash">
+            </i>
+            <button style="float: right" type="submit"><i class="glyphicon glyphicon-floppy-disk"></i>
+            </button>
+          </form>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+

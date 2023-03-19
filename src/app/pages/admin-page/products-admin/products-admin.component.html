@@ -1,0 +1,23 @@
+<app-admin-header></app-admin-header>
+<div class="container">
+  <div class="col-md-1"></div>
+  <div class="col-md-9 offset-md-1">
+    <div class="row">
+      <h1>Alle producten</h1>
+    </div>
+
+    <div class="row">
+      <button class="btn btn-success" (click)="onNewProduct()">Nieuw product</button>
+    </div>
+    <div class="row">
+      <hr>
+      <p>Klik op een product om deze te managen</p>
+      <ul class="list-group">
+        <label style="margin-bottom: 1%" >Product naam | Aantal | Categorie | Prijs</label>
+        <a class="list-group-item" style="cursor: pointer; margin-bottom: 1%; word-spacing: 5px" *ngFor="let product of products" [routerLink]="['/', 'admin-all-products', 'edit', product.id]">
+          {{ product.productName }} | {{ product.amount }} | {{ product.category }} | {{ product.price }}
+        </a>
+      </ul>
+    </div>
+  </div>
+</div>
