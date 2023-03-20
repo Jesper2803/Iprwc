@@ -30,8 +30,6 @@ export class LoginComponent {
   }
 
   onSubmit(form: NgForm) {
-    const information = form.value;
-    // const sortedInformation = [information.firstName, information.lastName, information.email, information.password, information.confirmPassword];
     this.authService.login(form.value);
   }
 

@@ -19,10 +19,6 @@ export class ProductService {
   constructor(private http: HttpClient, private authService: AuthService){
   }
 
-
-
-
-
   getProductsWithType(url: string) {
 
     return this.http.get<Product[]>(this.apiLocation + url);

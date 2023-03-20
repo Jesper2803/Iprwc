@@ -19,12 +19,6 @@ export class ProductsComponent implements OnInit{
     this.productService.productSelected.subscribe((product: Product) => {
       this.selectedProduct = product;
     })
-    // this.productService.getProductDataFromEndpoint("category").subscribe(
-    //   (products: [Product]) => {
-    //     this.products = products;
-    //     console.log(this.products);
-    //   }
-    // );
   }
 
 

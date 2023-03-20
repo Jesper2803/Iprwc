@@ -23,14 +23,6 @@ export class UserPageComponent {
     if (localStorage.getItem('role') === 'ROLE_ADMIN'){
       this.router.navigate(['admin'])
     }
-    // return this.userService.getUser(<string>this.userId).subscribe(
-    //   (res) => {
-    //     console.log(res)
-    //     if (res.role === 'ROLE_ADMIN'){
-    //       this.router.navigate(['admin'])
-    //     }
-    //   }
-    // )
   }
 
 }

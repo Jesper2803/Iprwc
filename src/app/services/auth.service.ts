@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
-import {User} from '../shared/models/user.model';
 import {Router} from "@angular/router";
-import {UserService} from "./user.service";
 
 interface AuthRequest {
   token: string,

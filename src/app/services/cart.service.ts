@@ -13,19 +13,15 @@ export class CartService {
 
   productSelected = new Subject<Product>();
 
-  constructor(private http: HttpClient, private authService: AuthService){
+  constructor(){
   }
 
   getProducts() {
     return this.productList.asObservable();
-    // return this.products.slice();
   }
 
   setProduct(product: any) {
     this.products.push(...product)
-    // console.log(this.products)
-    // this.products.push(product);
-    // console.log(this.products)
     this.productList.next(product)
   }
 
@@ -42,13 +38,6 @@ export class CartService {
       grandTotal += a.total;
     })
     return grandTotal
-    // this.products.forEach(element =>
-    //   this.totalPrice += element.price)
-    // console.log(this.totalPrice)
-  }
-
-  deleteProductFromShoppingCart(product: Product) {
-    // this.products.pop(product)
   }
 
   removeCartItem(product: any) {

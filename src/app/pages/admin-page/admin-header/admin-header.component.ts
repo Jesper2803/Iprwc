@@ -20,9 +20,6 @@ export class AdminHeaderComponent {
     }
   }
 
-
-
-
   logout() {
     this.authService.logout();
   }

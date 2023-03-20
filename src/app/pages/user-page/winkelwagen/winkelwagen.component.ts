@@ -14,12 +14,9 @@ export class WinkelwagenComponent implements OnInit, OnDestroy{
 
   public products: any = []
   public grandTotal!: number;
-  // products: Product[];
   totalPrice: number;
   amount: number;
   cartEmpty: boolean;
-  private igChangeSub: Subscription;
-
 
   constructor(private router: Router, private productService: ProductService, private cartService: CartService) { }
 
@@ -39,7 +36,6 @@ export class WinkelwagenComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy() {
-    // this.igChangeSub.unsubscribe();
   }
 
   calculateTotalPrice(){

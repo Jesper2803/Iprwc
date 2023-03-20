@@ -9,13 +9,7 @@ import {AuthService} from "../../../services/auth.service";
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent{
-  // firstName: string;
-  // firstName: string;
-  // lastName: string;
-  // email: string;
-  // password: string;
-  // confirmPassword: string;
-  //
+
   userCreated: boolean;
   constructor(private authService: AuthService) { }
 
@@ -23,8 +17,6 @@ export class RegisterComponent{
   }
 
   onSubmit(form: NgForm) {
-    const information = form.value;
-    // const sortedInformation = [information.firstName, information.lastName, information.email, information.password, information.confirmPassword];
     this.authService.makeNewUser(form.value);
     this.userCreated = true;
   }

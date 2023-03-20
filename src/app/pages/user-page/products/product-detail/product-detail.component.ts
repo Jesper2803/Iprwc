@@ -29,7 +29,6 @@ export class ProductDetailComponent {
           console.log(this.product)
         }
       );
-      // this.product = this.productService.getProduct(this.id)
     });
     if (this.authService.getToken()!==null){
       this.loggedIn = true;
@@ -39,6 +38,5 @@ export class ProductDetailComponent {
   onAddToShoppingCart() {
     console.log(this.product)
     this.cartService.addProductToShoppingCart(this.product)
-    // this.productService.addProductToShoppingCart(this.product);
   }
 }

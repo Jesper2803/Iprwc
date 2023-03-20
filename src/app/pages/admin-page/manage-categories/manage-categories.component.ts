@@ -31,15 +31,12 @@ export class ManageCategoriesComponent {
 
 
   addCategory(form: NgForm) {
-    const information = form.value;
-    // const sortedInformation = [information.firstName, information.lastName, information.email, information.password, information.confirmPassword];
     this.categoryService.makeNewCategory(form.value).subscribe(
       (res) => {
         this.ngOnInit();
       }
     );
     this.ngOnInit()
-    // this.categoriesChanged.emit(this.categories.slice());
   }
 
   onDeletionCategory(categoryId: string) {
