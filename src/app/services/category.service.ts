@@ -1,5 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {environment} from "./environments";
+
 
 import {Category} from "../shared/models/category.model";
 import {AuthService} from "./auth.service";
@@ -7,7 +9,7 @@ import {AuthService} from "./auth.service";
 @Injectable({providedIn: 'root'})
 export class CategoryService {
 
-  private apiLocation = 'http://localhost:8080/api/v1/categories';
+  private apiLocation = environment.baseUrl + '/api/v1/categories';
 
   categoriesChanged = new EventEmitter<Category[]>();
 

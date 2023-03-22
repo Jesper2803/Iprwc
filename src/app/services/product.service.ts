@@ -1,14 +1,16 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import {Injectable, EventEmitter, createEnvironmentInjector} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
 import {Product} from '../shared/models/product.model';
 import {BehaviorSubject, Subject} from "rxjs";
 import {AuthService} from "./auth.service";
+import {environment} from "./environments";
+
 
 @Injectable({providedIn: 'root'})
 export class ProductService {
 
-  private apiLocation = 'http://localhost:8080/api/v1/products';
+  private apiLocation = environment.baseUrl + '/api/v1/products';
 
   productsChanged = new Subject<Product[]>();
   public products: any = [new Product('2', 'Aap', 'test', 3, 5, 'https://cdn.webshopapp.com/shops/50597/files/202371404/b-c-basic-heren-t-shirt.jpg')];

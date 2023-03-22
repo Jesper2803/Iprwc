@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-
+import {environment} from "./environments";
 import {Router} from "@angular/router";
 
 interface AuthRequest {
@@ -14,7 +14,7 @@ interface AuthRequest {
 @Injectable({providedIn: 'root'})
 export class AuthService {
 
-  private apiLocation = 'http://localhost:8080/api/v1/auth';
+  private apiLocation = environment.baseUrl + '/api/v1/auth';
   public static readonly apiTokenKey = 'token';
   loggedIn: boolean;
 

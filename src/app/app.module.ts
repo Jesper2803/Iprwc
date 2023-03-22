@@ -76,7 +76,7 @@ const appRoutes: Routes = [
     ProductDetailComponent,
     ProductEditComponent,
     UserEditComponent,
-    WinkelwagenComponent,
+    WinkelwagenComponent
   ],
   imports: [
     BrowserModule,
