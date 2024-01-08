@@ -2,31 +2,36 @@ import {Injectable, EventEmitter, createEnvironmentInjector} from '@angular/core
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
 import {Product} from '../shared/models/product.model';
-import {BehaviorSubject, Subject} from "rxjs";
+import {BehaviorSubject, map, Observable, Subject, tap} from "rxjs";
 import {AuthService} from "./auth.service";
 import {environment} from "./environments";
+import {ProductRequest} from "../shared/models/productRequest.model";
+import {CartItem} from "../shared/models/cartItem.model";
 
 
 @Injectable({providedIn: 'root'})
 export class ProductService {
 
   private apiLocation = environment.baseUrl + '/api/v1/products';
-
-  productsChanged = new Subject<Product[]>();
-  public products: any = [new Product('2', 'Aap', 'test', 3, 5, 'https://cdn.webshopapp.com/shops/50597/files/202371404/b-c-basic-heren-t-shirt.jpg')];
-  public productList = new BehaviorSubject<any>([]);
-
-  productSelected = new Subject<Product>();
+  public selectedProduct = new Subject<Product>();
 
   constructor(private http: HttpClient, private authService: AuthService){
   }
 
-  getProductsWithType(url: string) {
+  setSelectedProduct(product: Product): void {
+    this.selectedProduct.next(product);
+  }
 
+  getSelectedProduct() {
+    return this.selectedProduct.asObservable();
+  }
+
+
+  getProductsWithType(url: string) {
     return this.http.get<Product[]>(this.apiLocation + url);
   }
 
-  getAllProducts() {
+  getAllProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiLocation);
   }
 
@@ -38,16 +43,14 @@ export class ProductService {
     return this.http.get<Product[]>(this.apiLocation +  '/category/' +  category);
   }
 
-  makeNewProduct(postData: { productName: String; amount: number; category: String; price: number; imagePath: string }) {
-    console.log(postData);
+  makeNewProduct(postData: ProductRequest ): Observable<void> {
     const apiPoint = this.apiLocation + '/admin/new';
-    console.log(apiPoint);
     return this.http
-      .post(apiPoint, postData, {
+      .post<void>(apiPoint, postData, {
         headers: new HttpHeaders()
           .set('Content-Type', 'application/json')
           .set('Authorization', 'Bearer '+ this.authService.getToken())
-      }).subscribe(responseData => {console.log(responseData);});
+      })
   }
 
   deleteProduct(productId: string){
@@ -60,11 +63,9 @@ export class ProductService {
     )
   }
 
-  updateProduct(productId: string, postData: { productName: String; amount: number; category: String; price: number; imagePath: string }) {
+  updateProduct(productId: string, postData: ProductRequest): Observable<void> {
     const apiPoint = this.apiLocation + '/admin/' + productId;
-    console.log(apiPoint)
-    console.log(postData)
-    return this.http.put(apiPoint, postData,
+    return this.http.put<void>(apiPoint, postData,
       {
         headers: new HttpHeaders()
           .set('Content-Type', 'application/json')
@@ -72,12 +73,4 @@ export class ProductService {
       }
     );
   }
-
-  getProduct(id: number){
-    return this.products.slice()[id];
-  }
-
-
-
-
 }

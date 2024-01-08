@@ -4,16 +4,30 @@
   <div class="col-md-9 offset-md-1">
     <div class="row">
       <h1>Alle Gebruikers</h1>
-    </div>
-    <div class="row">
       <hr>
       <p>Klik op de gebruiker die u wilt managen</p>
-      <ul class="list-group">
-        <a class="list-group-item" style="cursor: pointer; margin-bottom: 1%; word-spacing: 5px" *ngFor="let user of users"
-           [routerLink]="['/', 'admin-all-users', 'edit', user.id]">
-          {{ user.firstName }} | {{ user.lastName }}
-        </a>
-      </ul>
+    </div>
+
+    <div class="row">
+      <div class="card-table">
+        <div class="card-product">
+          <table class="table table-responsive">
+            <thead>
+              <tr>
+                <th>Voornaam</th>
+                <th>Achternaam</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="tr-body" *ngFor="let user of users" style="cursor: pointer"  [routerLink]="['/', 'admin-all-users', 'edit', user.id]">
+                  <td>{{ user.firstName }}</td>
+                  <td>{{ user.lastName }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

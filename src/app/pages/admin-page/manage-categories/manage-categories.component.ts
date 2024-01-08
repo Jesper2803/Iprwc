@@ -48,11 +48,8 @@ export class ManageCategoriesComponent {
   }
 
   editCategory(categoryId: string, form: NgForm) {
-    console.log(form.value)
-    console.log(categoryId)
     this.categoryService.updateCategory(categoryId, form.value).subscribe(
       (res) => {
-        console.log(res);
         this.ngOnInit()
         this.editMode = false;
       }

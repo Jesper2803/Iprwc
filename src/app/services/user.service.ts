@@ -4,6 +4,8 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {User} from '../shared/models/user.model';
 import {AuthService} from "./auth.service";
 import {environment} from "./environments";
+import {Observable} from "rxjs";
+import {UserRequest} from "../shared/models/userRequest.model";
 
 
 @Injectable({providedIn: 'root'})
@@ -33,8 +35,6 @@ export class UserService {
   }
 
   deleteUser(userId: string){
-    console.log(this.authService.getToken())
-    console.log(userId)
     return this.http.delete(this.apiLocation + '/' + userId,
       {
         headers: new HttpHeaders()
@@ -44,11 +44,9 @@ export class UserService {
     )
   }
 
-  updateUser(userId: string, postData: { firstName: String; lastName: String; password: String; email: String }) {
+  updateUser(userId: string, postData: UserRequest): Observable<void> {
     const apiPoint = this.apiLocation + '/' + userId;
-    console.log(apiPoint)
-    console.log(postData)
-    return this.http.put(apiPoint, postData,
+    return this.http.put<void>(apiPoint, postData,
       {
         headers: new HttpHeaders()
           .set('Content-Type', 'application/json')
@@ -56,9 +54,4 @@ export class UserService {
       }
     );
   }
-
-
-
-
-
 }

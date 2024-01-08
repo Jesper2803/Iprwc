@@ -14,7 +14,6 @@ export class AuthGuardAdmin implements CanActivate{
       return this.router.createUrlTree(['/'])
     }
     else {
-
       return true;
     }
   }

@@ -8,9 +8,10 @@
     </div>
     <div class="row">
       <app-product-item
-        *ngFor="let productEl of products; let i = index"
+        *ngFor="let productEl of products"
         [product]="productEl"
-        [index]="i"></app-product-item>
+        (click)="selectProduct(productEl)"
+        ></app-product-item>
     </div>
   </div>
 </div>

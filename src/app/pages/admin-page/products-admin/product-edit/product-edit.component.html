@@ -19,23 +19,12 @@
       <input [(ngModel)]="imagePath" class="form-control" type="text" placeholder="Image Path" name="imagePath" required>
       <button style="margin-top: 10px" type="submit" class="btn btn-primary mb-3" [disabled]="!f.valid">Pas aan</button>
       <p *ngIf="productEdited">Product is aangepast!<button class="btn btn-primary mb-3" [routerLink]="['/', 'admin-all-products']">Navigeer naar Manage Producten</button></p>
-      <h2>Of verwijder het product</h2>
-      <button (click)= "onDeletionProduct(productId)" class="btn btn-danger">Verwijder</button>
+      <p *ngFor="let errorMessage of errorMessages">{{ errorMessage }}</p>
+
     </form>
+    <h2>Of verwijder het product</h2>
+    <button (click)= "onDeletionProduct(productId)" class="btn btn-danger">Verwijder</button>
   </div>
 </div>
-<!--<div class="container">-->
-<!--  <div class="row">-->
-<!--    <div class="col-md-4">.col-md-4</div>-->
-<!--    <div class="col-md-4 offset-md-4">.col-md-4 .offset-md-4</div>-->
-<!--  </div>-->
-<!--  <div class="row">-->
-<!--    <div class="col-md-3 offset-md-3">.col-md-3 .offset-md-3</div>-->
-<!--    <div class="col-md-3 offset-md-3">.col-md-3 .offset-md-3</div>-->
-<!--  </div>-->
-<!--  <div class="row">-->
-<!--    <div class="col-md-6 offset-md-3">.col-md-6 .offset-md-3</div>-->
-<!--  </div>-->
-<!--</div>-->
 
 

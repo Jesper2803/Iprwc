@@ -10,15 +10,12 @@ import {ProductService} from "../../../services/product.service";
   providers: [ProductService]
 })
 export class ProductsComponent implements OnInit{
-  selectedProduct: Product | undefined;
 
   constructor(private route: ActivatedRoute, private router: Router, private productService: ProductService) {
   }
 
   ngOnInit() {
-    this.productService.productSelected.subscribe((product: Product) => {
-      this.selectedProduct = product;
-    })
+
   }
 
 

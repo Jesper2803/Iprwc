@@ -7,17 +7,36 @@
     </div>
 
     <div class="row">
-      <button class="btn btn-success" (click)="onNewProduct()">Nieuw product</button>
+      <button class="btn btn-primary mb-3" (click)="onNewProduct()">Nieuw product</button>
     </div>
     <div class="row">
       <hr>
       <p>Klik op een product om deze te managen</p>
-      <ul class="list-group">
-        <label style="margin-bottom: 1%" >Product naam | Aantal | Categorie | Prijs</label>
-        <a class="list-group-item" style="cursor: pointer; margin-bottom: 1%; word-spacing: 5px" *ngFor="let product of products" [routerLink]="['/', 'admin-all-products', 'edit', product.id]">
-          {{ product.productName }} | {{ product.amount }} | {{ product.category }} | {{ product.price }}
-        </a>
-      </ul>
+
+      <div class="card-table">
+        <div class="card-product">
+          <table class="table table-responsive">
+            <thead>
+              <tr>
+                <th>Productnaam</th>
+                <th>Hoeveelheid</th>
+                <th>Categorie</th>
+                <th>Prijs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="tr-body" *ngFor="let product of products" style="cursor: pointer"  [routerLink]="['/', 'admin-all-products', 'edit', product.id]">
+                <td>{{ product.productName }}</td>
+                <td>{{ product.amount }}</td>
+                <td>{{ product.category }}</td>
+                <td>{{ product.price }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
     </div>
   </div>
 </div>

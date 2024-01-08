@@ -4,6 +4,7 @@ import {ProductService} from "../../../../services/product.service";
 import {ActivatedRoute, Params} from "@angular/router";
 import {AuthService} from "../../../../services/auth.service";
 import {CartService} from "../../../../services/cart.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-product-detail',
@@ -11,7 +12,6 @@ import {CartService} from "../../../../services/cart.service";
   styleUrls: ['./product-detail.component.scss']
 })
 export class ProductDetailComponent {
-  // @ts-ignore
   product: Product;
   id: number;
   loggedIn: boolean;
@@ -20,23 +20,18 @@ export class ProductDetailComponent {
   }
 
   ngOnInit(){
-    console.log("test")
-    this.route.params.subscribe((params: Params) => {
-      this.id = +params['id'];
-      this.productService.getProductById(String(this.id)).subscribe(
-        (res: Product) => {
-          this.product = res;
-          console.log(this.product)
-        }
-      );
-    });
+
+    this.productService.getSelectedProduct().subscribe(
+      (product: Product) => {
+        this.product = product;
+        console.log(this.product.id)
+      })
     if (this.authService.getToken()!==null){
       this.loggedIn = true;
     }
   }
 
   onAddToShoppingCart() {
-    console.log(this.product)
     this.cartService.addProductToShoppingCart(this.product)
   }
 }

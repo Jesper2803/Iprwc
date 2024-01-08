@@ -3,6 +3,8 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 import {UserService} from "../../../../services/user.service";
 import {User} from "../../../../shared/models/user.model";
 import {NgForm} from "@angular/forms";
+import {ProductRequest} from "../../../../shared/models/productRequest.model";
+import {UserRequest} from "../../../../shared/models/userRequest.model";
 
 @Component({
   selector: 'app-user-edit',
@@ -16,6 +18,7 @@ export class UserEditComponent {
   email: string;
   password: string;
   userEdited: boolean;
+  errorMessages: string[];
 
   constructor(private route: ActivatedRoute, private router: Router, private userService: UserService) { }
 
@@ -23,8 +26,6 @@ export class UserEditComponent {
     this.route.params.subscribe(
       (params: Params) => {
         this.userId = params['id']
-        console.log(this.userId);
-
       }
     );
 
@@ -39,18 +40,20 @@ export class UserEditComponent {
   }
 
   onSubmit(form: NgForm) {
-    console.log(form.value)
-    const information = form.value;
-    const firstName = information.firstName;
-    const lastName = information.lastName;
-    const email = information.email;
-    const password = information.password;
-    this.userService.updateUser(this.userId, {firstName, lastName, password, email}).subscribe(
-      (res) => {
-        console.log(res);
+    const updatedUser: UserRequest = {
+      firstName: form.value.firstName,
+      lastName: form.value.lastName,
+      password: form.value.password,
+      email: form.value.email,
+    }
+    this.userService.updateUser(this.userId, updatedUser).subscribe(
+      (response) => {
+        this.errorMessages = []
+        this.userEdited = true;
+      }, (error) =>{
+        this.errorMessages = error.error
       }
     );
-    this.userEdited = true;
   }
 
   onDeletionUser(userId: string) {

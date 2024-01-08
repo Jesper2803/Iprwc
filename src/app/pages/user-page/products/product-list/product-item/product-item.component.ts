@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Product} from "../../../../../shared/models/product.model";
+import {ProductService} from "../../../../../services/product.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-product-item',
@@ -9,8 +11,6 @@ import {Product} from "../../../../../shared/models/product.model";
 export class ProductItemComponent implements OnInit {
   @Input()
   product!: Product;
-  // @ts-ignore
-  @Input() index: number;
 
 
   ngOnInit(){

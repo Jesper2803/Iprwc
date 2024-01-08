@@ -5,9 +5,11 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a [routerLink]="['/', 'admin-all-products']">Manage Producten</a></li>
-        <li><a [routerLink]="['/', 'admin-all-users']">Manage Gebruikers</a></li>
-        <li><a [routerLink]="['/', 'manage-categories']">Manage Categorien</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/', 'admin-all-products']">Manage Producten</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/', 'admin-all-users']">Manage Gebruikers</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/', 'manage-categories']">Manage Categorieën</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/', 'admin-all-orders']">Alle orders</a></li>
+
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li *ngIf="loggedIn"><a (click)="logout()" routerLink="/" style="cursor:pointer">Logout</a></li>

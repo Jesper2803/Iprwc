@@ -4,19 +4,22 @@
       <a [routerLink]="['/']" class="navbar-brand">Webshop</a>
     </div>
     <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li *ngFor="let category of categories"><a [routerLink]="['/', 'products', category.categoryName]">{{category.categoryName}}</a></li>
+      <ul class="nav navbar-nav nav-category">
+        <li routerLinkActive="active" class="category" *ngFor="let category of categories"><a [routerLink]="['/', 'products', category.categoryName]">{{category.categoryName}}</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li *ngIf="loggedIn">
+        <li routerLinkActive="active" *ngIf="loggedIn">
           <a [routerLink] = "['/', 'basket']">
             <i class="glyphicon glyphicon-shopping-cart">
             </i>
+            <div style="font-size: 10px" class="badge bg-danger">{{totalCartItems}}</div>
           </a>
         </li>
+        <li routerLinkActive="active" *ngIf="loggedIn"><a [routerLink]="['/', 'my-orders']">Mijn orders</a></li>
+
 
         <li *ngIf="loggedIn"><a (click)="logout()" routerLink="/" style="cursor:pointer">Logout</a></li>
-        <li  *ngIf="!loggedIn"><a [routerLink]="['/', 'login']">Login</a></li>
+        <li routerLinkActive="active" *ngIf="!loggedIn"><a [routerLink]="['/', 'login']">Login</a></li>
       </ul>
     </div>
   </div>

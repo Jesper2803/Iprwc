@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Product} from "../../../../shared/models/product.model";
 import {ProductService} from "../../../../services/product.service";
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 
 @Component({
   selector: 'app-product-list',
@@ -13,7 +13,7 @@ export class ProductListComponent {
   products: Product[];
   category: string;
 
-  constructor(private productService: ProductService, private route: ActivatedRoute) {
+  constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(){
@@ -23,22 +23,19 @@ export class ProductListComponent {
         this.productService.getAllProducts().subscribe(
           (objectArray: Object[]) => {
             this.products = objectArray as [Product];
-            this.products.forEach((a:any)=>{
-              Object.assign(a,{quantiy:1, total:a.price});
-            })
           }
         )
       }else {
-        console.log(this.category)
         this.productService.getProductByCategory(this.category).subscribe(
           (objectArray: Object[]) => {
             this.products = objectArray as [Product];
-            this.products.forEach((a:any)=>{
-              Object.assign(a,{quantity:1, total:a.price});
-            })
           });
       }
     });
   }
 
+
+  selectProduct(product: Product) {
+    this.productService.setSelectedProduct(product)
+  }
 }

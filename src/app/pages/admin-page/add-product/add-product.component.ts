@@ -3,6 +3,8 @@ import {NgForm} from "@angular/forms";
 import {ProductService} from "../../../services/product.service";
 import {CategoryService} from "../../../services/category.service";
 import {Category} from "../../../shared/models/category.model";
+import {OrderRequest} from "../../../shared/models/orderRequest.model";
+import {ProductRequest} from "../../../shared/models/productRequest.model";
 
 @Component({
   selector: 'app-add-product',
@@ -12,11 +14,11 @@ import {Category} from "../../../shared/models/category.model";
 export class AddProductComponent {
   categories: Category[] = [];
   productAdded: boolean;
+  errorMessages: string[];
 
   constructor(private catService: CategoryService, private productService: ProductService) {
     this.catService.getAllCategories().subscribe(
       data => {
-        console.log(data);
         this.categories = data;
       }
     );
@@ -26,10 +28,22 @@ export class AddProductComponent {
   }
 
   onSubmit(form: NgForm) {
-    const information = form.value;
-    const sortedInformation = [information.productName, information.amount, information.category, information.price, information.imagePath];
-    this.productService.makeNewProduct(form.value);
-    this.productAdded = true;
+    const newProduct: ProductRequest = {
+      productName: form.value.productName,
+      category: form.value.category,
+      amount: form.value.amount,
+      price: form.value.price,
+      imagePath: form.value.imagePath
+    }
+    this.productService.makeNewProduct(newProduct).subscribe(
+      (response)=> {
+        this.errorMessages = []
+        this.productAdded = true;
+      },
+      (error)=>{
+        this.errorMessages=error.error;
+      }
+    )
   }
 
 }

@@ -4,44 +4,50 @@ import {ProductService} from "../../../services/product.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import {CartService} from "../../../services/cart.service";
+import {OrderService} from "../../../services/order.service";
+import {Order} from "../../../shared/models/order.model";
+import {OrderRequest} from "../../../shared/models/orderRequest.model";
+import {CartItem} from "../../../shared/models/cartItem.model";
 
 @Component({
   selector: 'app-winkelwagen',
   templateUrl: './winkelwagen.component.html',
   styleUrls: ['./winkelwagen.component.scss']
 })
-export class WinkelwagenComponent implements OnInit, OnDestroy{
+export class WinkelwagenComponent implements OnInit, OnDestroy {
 
-  public products: any = []
-  public grandTotal!: number;
+  cartItems: CartItem[] = [];
   totalPrice: number;
   amount: number;
   cartEmpty: boolean;
+  userId: string;
+  orderPlaced: boolean;
 
-  constructor(private router: Router, private productService: ProductService, private cartService: CartService) { }
+
+  constructor(private router: Router, private productService: ProductService, private cartService: CartService, private orderService: OrderService) {
+  }
 
   ngOnInit() {
     this.totalPrice = 0;
-    this.cartService.getProducts().subscribe(res=>{
-      this.products=res;
-      this.grandTotal = this.cartService.calculateTotalPrice();
-      this.amount = this.products.length
+    this.cartService.getProducts().subscribe(res => {
+      this.cartItems = res;
+      this.amount = this.cartItems.reduce((total, item) => total + item.quantity, 0);
+
       this.calculateTotalPrice()
 
-      if (this.products.length == 0){
+      if (this.cartItems.length == 0) {
         this.cartEmpty = true;
       }
-      }
-    )
+    })
   }
 
   ngOnDestroy() {
   }
 
-  calculateTotalPrice(){
+  calculateTotalPrice() {
     this.totalPrice = 0;
-    this.products.map((a: any) => {
-      this.totalPrice += a.price;
+    this.cartItems.map((item: CartItem) => {
+      this.totalPrice += item.price * item.quantity;
     })
     return this.totalPrice
   }
@@ -51,9 +57,32 @@ export class WinkelwagenComponent implements OnInit, OnDestroy{
     this.totalPrice = 0;
   }
 
-  deleteItemFromCart(product: any) {
-    this.cartService.removeCartItem(product)
-    this.amount = this.products.length
+  deleteItemFromCart(cartItem: CartItem) {
+    this.cartService.removeCartItem(cartItem)
+    this.amount = this.cartItems.length
     this.calculateTotalPrice()
+  }
+
+  placeOrder() {
+    this.userId = <string>localStorage.getItem('userId')
+    const order: OrderRequest = {
+      userId: this.userId,
+      totalPrice: this.totalPrice,
+      orderItems: this.cartItems.map(cartItems => {
+        return {
+          productId: cartItems.productId,
+          productName: cartItems.productName,
+          quantity: cartItems.quantity
+        };
+      })
+    }
+    this.orderService.placeOrder(order).subscribe(
+      (response)=> {
+        this.emptyCart()
+        this.orderPlaced = true;
+      },
+      (error)=>{
+      }
+    )
   }
 }

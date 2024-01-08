@@ -1,0 +1,49 @@
+<app-header></app-header>
+<div class="container">
+  <div class="col-md-1"></div>
+  <div class="col-md-9 offset-md-1">
+    <div class="row">
+      <h1>Mijn orders</h1>
+    </div>
+    <div class="row">
+      <hr>
+      <p>Klik op een order om de inhoud te zien</p>
+
+
+      <div class="card-table">
+        <div class="card-product">
+          <table class="table table-responsive">
+            <thead>
+            <tr>
+              <th>Ordernummer</th>
+              <th>Datum</th>
+              <th>Totale prijs</th>
+              <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let order of orders">
+                <tr (click)="toggleRow(order)">
+                  <td>{{ order.orderId }}</td>
+                  <td>{{ order.formattedDate }}</td>
+                  <td>€ {{ order.totalPrice }},-</td>
+                  <td>{{ order.processed }}</td>
+                </tr>
+                <tr *ngIf="isRowExpanded(order)">
+                  <td colspan="3">
+                    <ul>
+                      <li *ngFor="let item of order.orderItems">
+                        Product naam: {{ item.productName }} - Aantal: {{ item.quantity }}
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              </ng-container>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

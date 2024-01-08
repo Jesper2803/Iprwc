@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgxCaptchaModule  } from 'ngx-captcha';
+import { CommonModule } from '@angular/common';
+
 
 import { AppComponent } from './app.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -27,6 +30,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { WinkelwagenComponent } from './pages/user-page/winkelwagen/winkelwagen.component';
 import {AuthGuardUser} from "./services/auth.guard.user";
 import {AuthGuardAdmin} from "./services/auth.guard.admin";
+import { MyOrdersComponent } from './pages/user-page/my-orders/my-orders.component';
+import { AllOrdersComponent } from './pages/admin-page/all-orders/all-orders.component';
 
 const appRoutes: Routes = [
   { path: '', component: UserPageComponent, children:[
@@ -42,6 +47,7 @@ const appRoutes: Routes = [
   { path: 'admin', component: AdminPageComponent, canActivate: [AuthGuardAdmin]},
   { path: 'add-product', component: AddProductComponent, canActivate: [AuthGuardAdmin]},
   { path: 'admin-all-users', component: AllUsersComponent, canActivate: [AuthGuardAdmin]},
+  { path: 'admin-all-orders', component: AllOrdersComponent, canActivate: [AuthGuardAdmin]},
   { path: 'admin-all-users/edit/:id', component: UserEditComponent, canActivate: [AuthGuardAdmin]},
   { path: 'admin-all-products/edit/:id', component: ProductEditComponent, canActivate: [AuthGuardAdmin]},
   { path: 'admin-all-products', component: ProductsAdminComponent, canActivate: [AuthGuardAdmin], children:[
@@ -52,6 +58,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'manage-categories', component: ManageCategoriesComponent, canActivate: [AuthGuardAdmin] },
   { path: 'basket', component: WinkelwagenComponent, canActivate: [AuthGuardUser]},
+  { path: 'my-orders', component: MyOrdersComponent, canActivate: [AuthGuardUser]},
   {path: '**', redirectTo: '/error' }
 ];
 
@@ -76,14 +83,17 @@ const appRoutes: Routes = [
     ProductDetailComponent,
     ProductEditComponent,
     UserEditComponent,
-    WinkelwagenComponent
+    WinkelwagenComponent,
+    MyOrdersComponent,
+    AllOrdersComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    FormsModule
-  ],
+    FormsModule,
+    NgxCaptchaModule,
+  CommonModule],
   exports:[
     MatDialogModule
   ],

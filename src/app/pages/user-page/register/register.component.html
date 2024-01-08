@@ -11,6 +11,8 @@
 
       <button style="margin-right: 1%; margin-top: 1%" type="submit" class="btn btn-primary mb-3" [disabled]="!f.valid">registreer</button>
       <p *ngIf="userCreated">Gebruiker is aangemaakt!<button style="margin-left: 1%" class="btn btn-primary mb-3" [routerLink]="['/', 'login']">Ga naar login</button></p>
+      <p *ngFor="let errorMessage of errorMessages">{{ errorMessage }}</p>
+
     </form>
   </div>
 </div>

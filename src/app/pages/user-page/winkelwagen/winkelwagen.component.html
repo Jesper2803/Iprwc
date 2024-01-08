@@ -3,16 +3,21 @@
   <div class="row">
       <h1>Winkelwagentje</h1>
     <div class="row">
+      <div *ngIf="cartEmpty" class="col-md-5">
+        <p>Je winkelmand is leeg!</p>
+        <button style="margin-top: 10px;" class="btn btn-primary mb-3">Zoek producten</button>
+      </div>
       <div class="col-md-5">
-        <p *ngIf="cartEmpty">Je winkelmand is leeg!</p>
         <ul class="list-group">
-          <li style="margin-bottom: 2%" *ngFor="let product of products" class="list-group-item">
-            <span>
-             <img src="{{product.imagePath}}" alt="" class="img-responsive" style="max-height: 75px;">
-            </span>
-            <h4 class="list-group-item-heading">{{product.productName}}</h4>
-            <p class="list-group-item-text" style="display: inline">€ {{ product.price }},-</p>
-            <i style="float: right; cursor: pointer" class="glyphicon glyphicon-trash" (click)="deleteItemFromCart(product)"></i>
+          <li style="margin-bottom: 2%; display: inline-block; max-width: 100%" *ngFor="let cartItem of cartItems" class="list-group-item products">
+            <div class="product-info">
+              <h4 class="list-group-item-heading product-name">{{cartItem.productName}}</h4>
+              <p class="list-group-item-text product-price">Prijs: € {{ cartItem.price }},-</p>
+              <p class="list-group-item-text product-price">Hoeveelheid: {{ cartItem.quantity }}</p>
+            </div>
+            <img src="{{cartItem.imagePath}}" alt="" class="img-responsive product-image">
+            <i style="display: inline; cursor: pointer" class="glyphicon glyphicon-trash" (click)="deleteItemFromCart(cartItem)"></i>
+
           </li>
         </ul>
       </div>
@@ -20,7 +25,8 @@
         <li class="list-group-item">
           <h4 style="margin-top: 10px;" class="list-group-item-heading">Aantal artikelen: {{amount}}</h4>
           <p style="margin-top: 10px;" class="list-group-item-text">Te betalen: {{totalPrice}},-</p>
-          <button style="margin-top: 10px;" class="btn btn-primary mb-3">Afrekenen</button>
+          <button (click)="placeOrder()" style="margin-top: 10px;" class="btn btn-primary mb-3">Afrekenen</button>
+          <p *ngIf="orderPlaced">Order is geplaatst!</p>
           <button style="display: block; margin-top: 20px" class="btn btn-primary btn-danger" (click)="emptyCart()">Leeg winkelwagentje</button>
         </li>
       </div>

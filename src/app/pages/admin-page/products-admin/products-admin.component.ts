@@ -22,7 +22,6 @@ export class ProductsAdminComponent {
     this.productService.getAllProducts().subscribe(
       (products: Product[]) => {
         this.products = products;
-        console.log(products)
       }
     );
   }

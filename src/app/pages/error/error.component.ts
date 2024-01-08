@@ -15,7 +15,6 @@ export class ErrorComponent {
   ngOnInit() {
     let countDown = setInterval(() => {
       this.counter = this.counter - 1;
-      console.log(this.counter)
       if(this.counter === 0){
         clearInterval(countDown)
         this.router.navigate(['/'])
