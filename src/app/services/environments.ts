@@ -1,3 +1,3 @@
 export const environment = {
-  baseUrl: 'http://localhost:8080'
+  baseUrl: 'https://iprwc-backend-production-3460.up.railway.app'
 }
