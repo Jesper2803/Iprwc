@@ -5,18 +5,18 @@
     <div class="row">
       <div *ngIf="cartEmpty" class="col-md-5">
         <p>Je winkelmand is leeg!</p>
-        <button style="margin-top: 10px;" class="btn btn-primary mb-3">Zoek producten</button>
+        <button [routerLink]="['/']" style="margin-top: 10px;" class="btn btn-primary mb-3">Zoek producten</button>
       </div>
       <div class="col-md-5">
         <ul class="list-group">
-          <li style="margin-bottom: 2%; display: inline-block; max-width: 100%" *ngFor="let cartItem of cartItems" class="list-group-item products">
+          <li style="margin-bottom: 2%; display: block; max-width: 100%" *ngFor="let cartItem of cartItems" class="list-group-item products">
             <div class="product-info">
               <h4 class="list-group-item-heading product-name">{{cartItem.productName}}</h4>
               <p class="list-group-item-text product-price">Prijs: € {{ cartItem.price }},-</p>
               <p class="list-group-item-text product-price">Hoeveelheid: {{ cartItem.quantity }}</p>
             </div>
             <img src="{{cartItem.imagePath}}" alt="" class="img-responsive product-image">
-            <i style="display: inline; cursor: pointer" class="glyphicon glyphicon-trash" (click)="deleteItemFromCart(cartItem)"></i>
+            <i style="display: inline; float: right; cursor: pointer" class="glyphicon glyphicon-trash" (click)="deleteItemFromCart(cartItem)"></i>
 
           </li>
         </ul>

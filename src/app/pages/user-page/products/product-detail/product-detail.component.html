@@ -7,7 +7,8 @@
           <h1>{{ product.productName }}</h1>
           <h1>€ {{ product.price }},-</h1>
           <button *ngIf="loggedIn" class="btn btn-success" (click)="onAddToShoppingCart()">Voeg toe aan winkelmandje</button>
-          <p *ngIf="!loggedIn">Log in om toe te voegen aan winkelwagen</p>
+          <p *ngIf="!loggedIn">Log in om toe te voegen aan winkelmandje</p>
+          <p *ngIf="productAdded">Product is toegevoegd aan winkelmandje!</p>
         </li>
       </div>
     </div>

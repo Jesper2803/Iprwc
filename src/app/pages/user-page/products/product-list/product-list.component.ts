@@ -12,6 +12,7 @@ export class ProductListComponent {
   // @ts-ignore
   products: Product[];
   category: string;
+  allProducts: boolean;
 
   constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router) {
   }
@@ -20,12 +21,14 @@ export class ProductListComponent {
     this.route.params.subscribe((params: Params) => {
       this.category = params['category'];
       if (this.category == null){
+        this.allProducts = true;
         this.productService.getAllProducts().subscribe(
           (objectArray: Object[]) => {
             this.products = objectArray as [Product];
           }
         )
       }else {
+        this.allProducts = false
         this.productService.getProductByCategory(this.category).subscribe(
           (objectArray: Object[]) => {
             this.products = objectArray as [Product];

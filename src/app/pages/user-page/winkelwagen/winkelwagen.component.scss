@@ -6,14 +6,15 @@
 //
 
 .product-info{
-  display: inline-block;
+  display: block;
+  margin-bottom: 10px;
 
 }
 
 .product-image {
   max-width: 100%;
-  height: 75px;
-  max-height: 75px;
+  height: 100px;
+  max-height: 100px;
   margin-left: 5%;
 
   display: inline;

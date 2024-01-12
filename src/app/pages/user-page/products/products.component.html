@@ -1,6 +1,20 @@
 <app-header></app-header>
 <body>
-<app-product-list></app-product-list>
+<div class="container-fluid">
+  <div class="container-fluid bg-primary text-white text-center py-5" style="margin-bottom: 1%">
+    <h2 class="display-4">Welcome to BestMusic</h2>
+    <p class="lead">Products from all your favorite artists!</p>
+  </div>
+  <div class="row align-items-end">
+    <div class="col-md-3" *ngFor="let category of categories">
+      <a [routerLink]="['/', 'products', category.categoryName]" class="list-group-item clearfix" >
+        <h4 style="text-align: center">{{category.categoryName}}</h4>
+      </a>
+    </div>
+  </div>
+
+  <app-product-list></app-product-list>
+</div>
 
 <router-outlet></router-outlet>
 

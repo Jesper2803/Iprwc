@@ -15,6 +15,7 @@ export class ProductDetailComponent {
   product: Product;
   id: number;
   loggedIn: boolean;
+  productAdded: boolean;
 
   constructor(private productService: ProductService, private route: ActivatedRoute, private authService: AuthService, private cartService: CartService) {
   }
@@ -24,7 +25,8 @@ export class ProductDetailComponent {
     this.productService.getSelectedProduct().subscribe(
       (product: Product) => {
         this.product = product;
-        console.log(this.product.id)
+        this.productAdded = false;
+
       })
     if (this.authService.getToken()!==null){
       this.loggedIn = true;
@@ -33,5 +35,6 @@ export class ProductDetailComponent {
 
   onAddToShoppingCart() {
     this.cartService.addProductToShoppingCart(this.product)
+    this.productAdded = true;
   }
 }
