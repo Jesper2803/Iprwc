@@ -13,7 +13,14 @@ import {CartItem} from "../shared/models/cartItem.model";
 export class ProductService {
 
   private apiLocation = environment.baseUrl + '/api/v1/products';
-  public selectedProduct = new Subject<Product>();
+  public selectedProduct = new BehaviorSubject<Product>({
+    amount: 0,
+    category: "",
+    id: "",
+    imagePath: "",
+    price: 0,
+    productName: ""
+  });
 
   constructor(private http: HttpClient, private authService: AuthService){
   }

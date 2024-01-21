@@ -23,15 +23,15 @@ export class ProductListComponent {
       if (this.category == null){
         this.allProducts = true;
         this.productService.getAllProducts().subscribe(
-          (objectArray: Object[]) => {
-            this.products = objectArray as [Product];
+          (products: Product[]) => {
+            this.products = products as [Product];
           }
         )
       }else {
         this.allProducts = false
         this.productService.getProductByCategory(this.category).subscribe(
-          (objectArray: Object[]) => {
-            this.products = objectArray as [Product];
+          (products: Product[]) => {
+            this.products = products as [Product];
           });
       }
     });
