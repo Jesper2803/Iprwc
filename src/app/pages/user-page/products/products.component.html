@@ -6,7 +6,7 @@
     <p class="lead">Products from all your favorite artists!</p>
   </div>
   <div class="row align-items-end">
-    <div class="col-md-3" *ngFor="let category of categories">
+    <div class="col-md-3" *ngFor="let category of categories" style="margin-top: 5px">
       <a [routerLink]="['/', 'products', category.categoryName]" class="list-group-item clearfix" >
         <h4 style="text-align: center">{{category.categoryName}}</h4>
       </a>
